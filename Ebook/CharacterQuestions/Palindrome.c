@@ -9,7 +9,7 @@
  * 那么，我们的第一个问题就是：判断一个字串是否是回文？
  */
 
-
+//思路一：从两边向中间进行判断
 /***
  * @param string 需要判断的字符串
  * @return 是否为回文数
@@ -29,12 +29,44 @@ bool palindrome(const char *string) {
   }
   return true;
 }
+//思路二：可以从中间向两边进行判断
+bool palindromeFromMid(const char *string, const int len) {
+  //获取中间值：采用位运算获取
+  /***
+   *   偶数个数： a  b  b  a
+   *               ^  ^
+   *   奇数个数： a  b  c  d  e
+   *               ^     ^
+   *   箭头就是需要指向的位置，然后从这个位置向两侧进行判断则可
+   */
+  const int mid = ((len >> 1) - 1) >= 0 ? len - 1 : 0;
+  //从左侧加了一个mid与之对称的是从右侧加一个mid，这样就是关于中心对称了
+  const char *left = string + mid;
+  const char *right = string + len - 1 - mid;
+  while (left >= string) {
+    if (*left != *right) {
+      return false;
+    }
+    left--;
+    right++;
+  }
+  return true;
+}
 int main(){
   const char arr[1000];
   printf("please input a string :");
   // &取地址符
   scanf("%s", &arr);
+  printf("first thinking: ");
   if (palindrome(arr)) {
+    printf("is a palindrome");
+  }else {
+    printf("isn't a palindrome");
+  }
+  printf("\n");
+
+  printf("second thinking: ");
+  if (palindromeFromMid(arr, (int)strlen(arr))) {
     printf("is a palindrome");
   }else {
     printf("isn't a palindrome");

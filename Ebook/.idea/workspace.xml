@@ -19,9 +19,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb4496d2-3848-4e57-afc5-059c7474c696" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/CharacterQuestions/CharacterToInt.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CharacterQuestions/Palindrome.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CharacterQuestions/Palindrome.c" beforeDir="false" afterPath="$PROJECT_DIR$/CharacterQuestions/Palindrome.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Palindrome.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Palindrome.exe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +134,7 @@
       <recent name="G:\NotesOfAll\Algorithm\Ebook\CharacterQuestions" />
     </key>
   </component>
-  <component name="RunManager" selected="C/C++ File.CharacterToInt.c">
+  <component name="RunManager" selected="C/C++ File.Palindrome.c">
     <configuration name="CharacterContains.c" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Ebook" TARGET_NAME="CharacterContains.c" CONFIG_NAME="CharacterContains.c">
       <option name="sourceFile" value="CharacterQuestions\CharacterContains.c" />
       <method v="2">
@@ -167,8 +167,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="C/C++ File.CharacterToInt.c" />
         <item itemvalue="C/C++ File.Palindrome.c" />
+        <item itemvalue="C/C++ File.CharacterToInt.c" />
         <item itemvalue="C/C++ File.CharacterContains.c" />
         <item itemvalue="C/C++ File.CharacterQuestions.c (1)" />
       </list>
@@ -182,7 +182,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739883600234</updated>
-      <workItem from="1739883601613" duration="21136000" />
+      <workItem from="1739883601613" duration="23085000" />
     </task>
     <servers />
   </component>
