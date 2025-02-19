@@ -29,7 +29,7 @@
 *.dylib
 
 # Executables
-*.exe
+*.exe          # 忽略所有 .exe 文件
 *.out
 *.app
 *.i*86
