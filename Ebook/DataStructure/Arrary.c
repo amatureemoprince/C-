@@ -47,7 +47,8 @@ bool removeIndex(int *arr, const int index, int *len) {
   for (int i = index; i < *len - 1; i++) {
     arr[i] = arr[i + 1];
   }
-  (*len)--; // 更新长度
+  // 更新长度，这样就不用处理剩余那个元素了，因为已经不会再遍历到它了
+  (*len)--;
   return true;
 }
 
