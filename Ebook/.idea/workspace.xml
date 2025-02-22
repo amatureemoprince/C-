@@ -19,9 +19,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb4496d2-3848-4e57-afc5-059c7474c696" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/DataStructure/Arrary.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure/LinkList.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataStructure/Arrary.c" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure/Arrary.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataStructure/LinkList.c" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure/LinkList.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LinkList.exe" beforeDir="false" afterPath="$PROJECT_DIR$/LinkList.exe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -280,7 +281,7 @@
       <recent name="G:\NotesOfAll\Algorithm\Ebook\CharacterQuestions" />
     </key>
   </component>
-  <component name="RunManager" selected="C/C++ File.Arrary.c">
+  <component name="RunManager" selected="C/C++ File.LinkList.c">
     <configuration name="Arrary.c" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Ebook" TARGET_NAME="Arrary.c" CONFIG_NAME="Arrary.c">
       <option name="sourceFile" value="DataStructure\Arrary.c" />
       <method v="2">
@@ -319,8 +320,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="C/C++ File.Arrary.c" />
         <item itemvalue="C/C++ File.LinkList.c" />
+        <item itemvalue="C/C++ File.Arrary.c" />
         <item itemvalue="C/C++ File.LongestPalindrome.c" />
         <item itemvalue="C/C++ File.Palindrome.c" />
         <item itemvalue="C/C++ File.CharacterToInt.c" />
@@ -335,7 +336,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739883600234</updated>
-      <workItem from="1739883601613" duration="41431000" />
+      <workItem from="1739883601613" duration="50717000" />
     </task>
     <servers />
   </component>
