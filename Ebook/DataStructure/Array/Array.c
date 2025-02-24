@@ -1,3 +1,4 @@
+#include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -217,6 +218,30 @@ int findMidNumber(const int *arr, const int *brr, const int len) {
   return result;
 }
 
+/**
+ *2012真题
+ *已知一个整数序列A=(a0,a1,...,an−1)，其中0<=ai<n(0<=i<n)。若存在ap1=ap2=...=apm=x且m>n/2(0<=pk<n,1<=k<=m)，则称x为A
+ *的主元素。例如A=(0,5,5,3,5,7,5,5)，则5为主元素；又如A=(0,5,3,5,1,5,7)，则A中没有主元素。假设A中的n个元素保存在一个一维数组中，
+ *请设计一个尽可能高效的算法，找出A中的主元素。若存在主元素，则输出该元素；否则输出−1。
+ */
+int findMain(const int *arr, const int len) {
+  int *brr = (int *)malloc(sizeof(int) * len);
+  for (int i = 0; i < len; i++) {
+    brr[i] = 0;
+  }
+  for (int i = 0; i < len; i++) {
+    brr[arr[i]]++;
+  }
+  int result = -1;
+  for (int i = 0; i < len; i++) {
+    if (brr[i] > len / 2) {
+      result = i;
+      break;
+    }
+  }
+  free(brr);
+  return result;
+}
 int main(void) {
   // 动态分配数组
   int *arr = (int *)malloc(5 * sizeof(int));
@@ -276,10 +301,16 @@ int main(void) {
   printf("\nthe 2011 year's result is %d\n", findMidNumber(crr, drr, 5));
   // TODO: 测试2010年考试题
   int err[6] = {12, 34, 44, 54, 67, 99};
+  printf("the array is [12, 34, 44, 54, 67, 99]");
   moveLeft(err, 3, 6);
   printf("test 2010's result: ");
   for (int i = 0; i < 6; i++) {
     printf("%d ", err[i]);
   }
+  printf("\n");
+  // TODO: 测试2012年考试题
+  const int grr[8] = {0,5,5,3,5,7,5,5};
+  printf("the array is [0,5,5,3,5,7,5,5]\n");
+  printf("test 2012 problem find main number is: %d", findMain(grr, 8));
   return 0;
 }
