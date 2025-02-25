@@ -18,12 +18,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb4496d2-3848-4e57-afc5-059c7474c696" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/DataStructure/Array/DynamicArray.c" afterDir="false" />
+    <list default="true" id="fb4496d2-3848-4e57-afc5-059c7474c696" name="Changes" comment="ds-动态数组">
+      <change afterPath="$PROJECT_DIR$/DataStructure/Tree/Three.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Array.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Array.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure/Array.c" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure/Array/Array.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure/LinkList.c" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure/LinkList/LinkList.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataStructure/LinkList/LinkList.c" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure/LinkList/LinkList.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LinkList.exe" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,24 +37,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CharacterQuestions/CharacterQuestions.c" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CharacterQuestions/Palindrome.c" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DataStructure/Array/Array.c" root0="FORCE_HIGHLIGHTING" />
@@ -86,9 +68,11 @@
     "C/C++ File.CharacterQuestions.c.executor": "Run",
     "C/C++ File.CharacterToInt.c.executor": "Run",
     "C/C++ File.DynamicArray.c.executor": "Debug",
-    "C/C++ File.LinkList.c.executor": "Debug",
+    "C/C++ File.LinkList.c (1).executor": "Run",
+    "C/C++ File.LinkList.c.executor": "Run",
     "C/C++ File.LongestPalindrome.c.executor": "Run",
     "C/C++ File.Palindrome.c.executor": "Run",
+    "C/C++ File.Three.c.executor": "Run",
     "C/C++ File.palindrome.c.executor": "Run",
     "RunOnceActivity.RadMigrateCodeStyle": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -98,7 +82,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "G:/NotesOfAll/Algorithm/Ebook/CharacterQuestions.c",
+    "last_opened_file_path": "F:/soft/Git/homePage/README.md",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -115,7 +99,13 @@
       <recent name="G:\NotesOfAll\Algorithm\Ebook\CharacterQuestions" />
     </key>
   </component>
-  <component name="RunManager" selected="C/C++ File.DynamicArray.c">
+  <component name="RunManager" selected="C/C++ File.Array.c">
+    <configuration name="Array.c" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Ebook" TARGET_NAME="Array.c" CONFIG_NAME="Array.c">
+      <option name="sourceFile" value="DataStructure\Array\Array.c" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CharacterQuestions.c" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Ebook" TARGET_NAME="CharacterQuestions.c" CONFIG_NAME="CharacterQuestions.c">
       <option name="sourceFile" value="CharacterQuestions.c" />
       <method v="2">
@@ -128,8 +118,8 @@
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LinkList.c" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Ebook" TARGET_NAME="LinkList.c" CONFIG_NAME="LinkList.c">
-      <option name="sourceFile" value="DataStructure\LinkList.c" />
+    <configuration name="LinkList.c (1)" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Ebook" TARGET_NAME="LinkList.c" CONFIG_NAME="LinkList.c">
+      <option name="sourceFile" value="DataStructure\LinkList\LinkList.c" />
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
@@ -140,18 +130,19 @@
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Palindrome.c" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Ebook" TARGET_NAME="Palindrome.c" CONFIG_NAME="Palindrome.c">
-      <option name="sourceFile" value="CharacterQuestions\Palindrome.c" />
+    <configuration name="Three.c" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Ebook" TARGET_NAME="Three.c" CONFIG_NAME="Three.c">
+      <option name="sourceFile" value="DataStructure\Tree\Three.c" />
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="C/C++ File.Array.c" />
+        <item itemvalue="C/C++ File.LinkList.c (1)" />
+        <item itemvalue="C/C++ File.Three.c" />
         <item itemvalue="C/C++ File.DynamicArray.c" />
-        <item itemvalue="C/C++ File.LinkList.c" />
         <item itemvalue="C/C++ File.LongestPalindrome.c" />
-        <item itemvalue="C/C++ File.Palindrome.c" />
       </list>
     </recent_temporary>
   </component>
@@ -164,8 +155,18 @@
       <option name="presentableId" value="Default" />
       <updated>1739883600234</updated>
       <workItem from="1739883601613" duration="66816000" />
-      <workItem from="1740293927695" duration="11575000" />
+      <workItem from="1740293927695" duration="12942000" />
+      <workItem from="1740463371520" duration="5645000" />
     </task>
+    <task id="LOCAL-00001" summary="ds-动态数组">
+      <option name="closed" value="true" />
+      <created>1740401557863</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1740401557863</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,6 +185,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="remove .exe files" />
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="ds-动态数组" />
+    <option name="LAST_COMMIT_MESSAGE" value="ds-动态数组" />
   </component>
 </project>
