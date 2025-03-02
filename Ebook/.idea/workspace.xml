@@ -7,6 +7,7 @@
     <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
     <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexRemoved" />
   </component>
   <component name="CMakeProjectFlavorService">
     <option name="flavorId" value="CMakePlainProjectFlavor" />
@@ -17,10 +18,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb4496d2-3848-4e57-afc5-059c7474c696" name="Changes" comment="ky-2012真题">
-      <change afterPath="$PROJECT_DIR$/DataStructure/Algorithm/LeetCode/WaterMax.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Exercise/TwoChapter.c" afterDir="false" />
+    <list default="true" id="fb4496d2-3848-4e57-afc5-059c7474c696" name="Changes" comment="wd-第二章课后习题">
+      <change afterPath="$PROJECT_DIR$/DataStructure/Stack/Stack.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise/TwoChapter.c" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise/TwoChapter.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +38,9 @@
     <setting file="file://$PROJECT_DIR$/CharacterQuestions/CharacterQuestions.c" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CharacterQuestions/Palindrome.c" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DataStructure/Array/Array.c" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/DataStructure/Array/DynamicArray.c" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/DataStructure/Array/DynamicArray.c" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DataStructure/LinkList/LinkList.c" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/DataStructure/Tree/Three.c" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -57,40 +59,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "C/C++ File.Arrary.c.executor": "Run",
-    "C/C++ File.Array.c.executor": "Run",
-    "C/C++ File.CharacterContains.c.executor": "Run",
-    "C/C++ File.CharacterQuestions.c (1).executor": "Run",
-    "C/C++ File.CharacterQuestions.c.executor": "Run",
-    "C/C++ File.CharacterToInt.c.executor": "Run",
-    "C/C++ File.DynamicArray.c.executor": "Debug",
-    "C/C++ File.LinkList.c (1).executor": "Run",
-    "C/C++ File.LinkList.c.executor": "Run",
-    "C/C++ File.LongestPalindrome.c.executor": "Run",
-    "C/C++ File.Palindrome.c.executor": "Run",
-    "C/C++ File.Three.c.executor": "Run",
-    "C/C++ File.TwoChapter.c.executor": "Run",
-    "C/C++ File.WaterMax.c.executor": "Run",
-    "C/C++ File.palindrome.c.executor": "Run",
-    "RunOnceActivity.RadMigrateCodeStyle": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "G:/NotesOfAll/github仓库（考研心得）/-408/README.md",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C/C++ File.Arrary.c.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.Array.c.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.CharacterContains.c.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.CharacterQuestions.c (1).executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.CharacterQuestions.c.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.CharacterToInt.c.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.DynamicArray.c.executor&quot;: &quot;Debug&quot;,
+    &quot;C/C++ File.LinkList.c (1).executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.LinkList.c.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.LongestPalindrome.c.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.Palindrome.c.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.Stack.c.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.Three.c.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.TwoChapter.c.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.WaterMax.c.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.palindrome.c.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;G:/NotesOfAll/github仓库（考研心得）/-408/README.md&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\NotesOfAll\Algorithm\Ebook\DataStructure\Algorithm" />
@@ -99,7 +102,7 @@
       <recent name="G:\NotesOfAll\Algorithm\Ebook\CharacterQuestions" />
     </key>
   </component>
-  <component name="RunManager" selected="C/C++ File.TwoChapter.c">
+  <component name="RunManager" selected="C/C++ File.Stack.c">
     <configuration name="Array.c" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Ebook" TARGET_NAME="Array.c" CONFIG_NAME="Array.c">
       <option name="sourceFile" value="DataStructure\Array\Array.c" />
       <method v="2">
@@ -118,8 +121,8 @@
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Three.c" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Ebook" TARGET_NAME="Three.c" CONFIG_NAME="Three.c">
-      <option name="sourceFile" value="DataStructure\Tree\Three.c" />
+    <configuration name="Stack.c" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Ebook" TARGET_NAME="Stack.c" CONFIG_NAME="Stack.c">
+      <option name="sourceFile" value="DataStructure\Stack\Stack.c" />
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
@@ -138,11 +141,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="C/C++ File.Stack.c" />
         <item itemvalue="C/C++ File.TwoChapter.c" />
         <item itemvalue="C/C++ File.WaterMax.c" />
         <item itemvalue="C/C++ File.Array.c" />
         <item itemvalue="C/C++ File.LinkList.c (1)" />
-        <item itemvalue="C/C++ File.Three.c" />
       </list>
     </recent_temporary>
   </component>
@@ -158,7 +161,8 @@
       <workItem from="1740293927695" duration="12942000" />
       <workItem from="1740463371520" duration="5906000" />
       <workItem from="1740528485107" duration="10094000" />
-      <workItem from="1740831964228" duration="2506000" />
+      <workItem from="1740831964228" duration="16178000" />
+      <workItem from="1740921386622" duration="2066000" />
     </task>
     <task id="LOCAL-00001" summary="ds-动态数组">
       <option name="closed" value="true" />
@@ -176,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740492162348</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="wd-第二章课后习题">
+      <option name="closed" value="true" />
+      <created>1740834772919</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1740834772919</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,6 +209,7 @@
     <MESSAGE value="remove .exe files" />
     <MESSAGE value="ds-动态数组" />
     <MESSAGE value="ky-2012真题" />
-    <option name="LAST_COMMIT_MESSAGE" value="ky-2012真题" />
+    <MESSAGE value="wd-第二章课后习题" />
+    <option name="LAST_COMMIT_MESSAGE" value="wd-第二章课后习题" />
   </component>
 </project>
