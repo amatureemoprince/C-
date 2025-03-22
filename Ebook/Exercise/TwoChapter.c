@@ -253,4 +253,3 @@ void findSample(const int *arr, int *brr, const int *crr, const int len) {
         free(sort1);
         return 0;
     }
-}

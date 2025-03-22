@@ -16,7 +16,6 @@ void insert(int **arr, int *len, const int index, const int val) {
     printf("invalid parameters\n");
     return;
   }
-  // 扩展数组的长度
   (*len)++;
   *arr = realloc(*arr, (*len) * sizeof(int));
   if (*arr == NULL) {

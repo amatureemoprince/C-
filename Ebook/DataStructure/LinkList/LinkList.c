@@ -9,6 +9,19 @@ typedef struct Node {
     int data;
     struct Node *next;
 } Node;
+#define MAX_SIZE 100
+typedef struct{
+    int data;
+    int next;
+}SLinkList[MAX_SIZE];
+// 初始化链表
+void initList(SLinkList list) {
+    for (int i = 0; i < MAX_SIZE; i++) {
+        list[i].data = 0;  // 初始化数据为 0
+        list[i].next = -1; // 初始化 next 为 -1，表示没有指向下一个节点
+    }
+}
+
 
 /**
  * 创建一个链表头结点
@@ -21,7 +34,7 @@ Node *createHead() {
         exit(EXIT_FAILURE);
     }
     head->data = 0;
-    head->next = NULL;
+    head->next = 0;
     return head;
 }
 
@@ -282,5 +295,19 @@ int main(void) {
     // TODO: 测试2009年数据结构题
     printf("the result is %d \n", findKBackWord(head, 1));
     freeNode(head);
+    SLinkList list; // 声明链表
+    initList(list); // 初始化链表
+
+    // 添加节点示例
+    list[0].data = 1;
+    list[0].next = 1; // 指向下一个节点
+    list[1].data = 2;
+    list[1].next = -1; // 最后一个节点的 next 指向 -1
+
+    // 打印链表
+    for (int i = 0; i < 2; i++) {
+        printf("Node %d: data = %d, next = %d\n", i, list[i].data, list[i].next);
+    }
+
     return 0;
 }
