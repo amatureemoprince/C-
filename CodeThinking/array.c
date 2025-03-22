@@ -107,20 +107,44 @@ int** generateMatrix(int n){
 	return result;
 }
 
-int main(){
-//	int arr[2][2] = {
-//	1, 2,
-//	3, 4
-//	};
-//	printf(" %0x\n %0x\n %0x\n %0x\n", 
-//	&arr[0][0], &arr[0][1], &arr[1][0],&arr[1][1]);
-	int x = 5;
-	int** result = generateMatrix(x);
-	for (int i = 0; i < x; i++) {
-		for (int j = 0; j < x; j++) {
-			printf("%d ", result[i][j]);
-		}
-		printf("\n");
-	}
-	return 0;
-}
+// int main(){
+// //	int arr[2][2] = {
+// //	1, 2,
+// //	3, 4
+// //	};
+// //	printf(" %0x\n %0x\n %0x\n %0x\n",
+// //	&arr[0][0], &arr[0][1], &arr[1][0],&arr[1][1]);
+// 	int x = 5;
+// 	int** result = generateMatrix(x);
+// 	for (int i = 0; i < x; i++) {
+// 		for (int j = 0; j < x; j++) {
+// 			printf("%d ", result[i][j]);
+// 		}
+// 		printf("\n");
+// 	}
+// 	return 0;
+// }
+
+
+//区间长度问题
+// int main() {
+// 	int n;
+// 	int a, b;
+// 	scanf("%d", &n);
+// 	int *arr = (int *)malloc(sizeof(int));
+// 	int *pi = (int *)malloc(sizeof(int));
+// 	for (int i = 0; i < n; i++) {
+// 		scanf("%d", &arr[i]);
+// 	}
+// 	pi[0] = arr[0];
+// 	for (int i = 1; i < n; i++) {
+// 		pi[i] = pi[i - 1] + arr[i];
+// 	}
+// 	while (scanf("%d %d", &a, &b)) {
+// 		if (a == 0)
+// 			printf("%d\n",  pi[b]);
+// 		else
+// 			printf("%d\n", pi[b] - pi[a - 1]);
+// 	}
+// 	return 0;
+// }
