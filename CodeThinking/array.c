@@ -1,5 +1,9 @@
-#include<stdio.h>
-#include<limits.h>
+// #include<stdio.h>
+// #include<limits.h>
+// #include <stdlib.h>
+
+#include <stdarg.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 int search(int *arr, int len, int val){
@@ -148,3 +152,55 @@ int** generateMatrix(int n){
 // 	}
 // 	return 0;
 // }
+int min(int a, int b) {
+	return a < b ? a : b;
+}
+
+int main() {
+	int n, m;
+	int num = 0;
+	scanf("%d %d", &n, &m);
+	int **arr = (int **)malloc(sizeof(int *) * n);
+
+	for (int i = 0; i < n; i++) {
+		arr[i] = (int *)malloc(sizeof(int) * m);
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			scanf("%d", &arr[i][j]);
+			num += arr[i][j];
+		}
+	}
+
+	printf("the all elements addition is %d\n", num);
+	int h[n];
+	int v[m];
+
+	int hNum = 0;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			hNum += arr[i][j];
+		}
+		h[i] = hNum;
+	}
+
+	int vNum = 0;
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			vNum += arr[j][i];
+		}
+		v[i] = vNum;
+	}
+
+	int result = INT_MAX;
+	for (int i = 0; i < n; i++) {
+		result = min(result, abs(num - h[i] - h[i]));
+	}
+
+	for (int i = 0; i < m; i++) {
+		result = min(result, abs(num - v[i] - v[i]));
+	}
+	printf("the min differ is %d", result);
+	return 0;
+}
