@@ -143,6 +143,25 @@ void deleteAtIndex(LinkList *list, int index) {
     free(temp);
 }
 
+//反转链表
+void reverse(LinkList *list) {
+    if (list == NULL) {
+        return;
+    }
+    LinkNode *pre = NULL;
+    LinkNode *cur = list->data->next;
+    LinkNode *temp;
+    while (cur) {
+        temp = cur->next;
+        cur->next = pre;
+        pre = cur;
+        cur = temp;
+    }
+    list->data->next = pre;
+}
+
+
+
 void printList(LinkNode *head) {
     LinkNode *current = head;
     while (current != NULL) {
@@ -205,5 +224,16 @@ int main() {
     deleteAtIndex(link_list, 4);
     coutList(link_list);
     free(link_list);
+
+    LinkList *list_reverse = createList();
+    for (int i = 0; i < 5; i++) {
+        insertAtHead(list_reverse, i);
+    }
+    printf("the two list is: \n");
+    coutList(list_reverse);
+    reverse(list_reverse);
+    printf("reverse the two list: \n");
+    coutList(list_reverse);
+    free(list_reverse);
     return 0;
 }
