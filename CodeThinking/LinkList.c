@@ -249,6 +249,42 @@ LinkNode *getIntersectionNode(LinkList *list_a, LinkList *list_b) {
     return NULL;
 }
 
+LinkNode *detectCycle(LinkList *list) {
+    if (list == NULL) {
+        return NULL;
+    }
+    LinkNode *head = list->data;
+    LinkNode *fast = head->next->next;
+    LinkNode *slow = head->next;
+
+    int pos = -1;
+    int index = -1;
+
+    while (fast != NULL) {
+        if (fast == NULL) {
+            break;
+        }
+        if (slow == fast) {
+            pos = index;
+            break;
+        }
+        fast = fast->next->next;
+        slow = slow->next;
+        index++;
+    }
+
+    if (pos != -1) {
+        slow = head;
+        while (slow != fast) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+        return slow;
+    }
+
+    return NULL;
+}
+
 LinkNode *createNode(int val) {
     LinkNode *node = (LinkNode *)malloc(sizeof(LinkNode));
     node->data = val;
@@ -270,6 +306,18 @@ void dealListThree(LinkList *list_a, LinkList *list_b) {
     list_b->data->next = link_node5;
 }
 
+void dealCycle(LinkList *list) {
+    // 2 4 5 8   result is 4
+    LinkNode * link_node1 = createNode(2);
+    LinkNode * link_node2 = createNode(4);
+    LinkNode * link_node3 = createNode(5);
+    LinkNode * link_node4 = createNode(8);
+    link_node1->next = link_node2;
+    link_node2->next = link_node3;
+    link_node3->next = link_node4;
+    link_node4->next = link_node2;
+    list->data->next = link_node1;
+}
 
 void printList(LinkNode *head) {
     LinkNode *current = head;
@@ -361,8 +409,18 @@ int main() {
     if (intersection_node == NULL) {
         printf("the two lists have't sample node.\n");
     }else {
-        printf("the two lists have sample node: %d.", intersection_node->data);
+        printf("the two lists have sample node: %d.\n", intersection_node->data);
     }
+
+    LinkList * links = createList();
+    dealCycle(links);
+    LinkNode * detect_cycle = detectCycle(links);
+    if (detect_cycle == NULL) {
+        printf("haven't cycle point!\n");
+    }else {
+        printf("the cycle point is %d.\n", detect_cycle->data);
+    }
+
     free(list_reverse);
     return 0;
 }
