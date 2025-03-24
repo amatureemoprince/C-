@@ -181,6 +181,29 @@ void exchangeNextTo(LinkList *list) {
 
 }
 
+void deleteTailK(LinkList *list, int k) {
+    if (list == NULL) {
+        return ;
+    }
+    if (k > list->size) {
+        return ;
+    }
+    LinkNode *p = list->data;
+    LinkNode *q = list->data;
+    for (int i = 0; i < k; i++) {
+        p = p->next;
+    }
+
+    while (p->next) {
+        p = p->next;
+        q = q->next;
+    }
+
+    LinkNode *temp = q->next;
+    q->next = p;
+    free(temp);
+}
+
 void printList(LinkNode *head) {
     LinkNode *current = head;
     while (current != NULL) {
@@ -255,6 +278,9 @@ int main() {
     coutList(list_reverse);
     printf("exchange the two list: \n");
     exchangeNextTo(list_reverse);
+    coutList(list_reverse);
+    printf("delete tail k :\n");
+    deleteTailK(list_reverse, 2);
     coutList(list_reverse);
     free(list_reverse);
     return 0;
