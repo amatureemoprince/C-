@@ -160,7 +160,26 @@ void reverse(LinkList *list) {
     list->data->next = pre;
 }
 
+void exchangeNextTo(LinkList *list) {
+    if (list == NULL) {
+        return ;
+    }
+    LinkNode *head = list->data;
 
+    LinkNode *p = head->next->next;
+    LinkNode *q = head->next;
+    while (p) {
+        LinkNode *temp = p->next;
+        p->next = head->next;
+        head->next = p;
+        q->next = temp;
+
+        head = q;
+        q = q->next;
+        p = q->next;
+    }
+
+}
 
 void printList(LinkNode *head) {
     LinkNode *current = head;
@@ -233,6 +252,9 @@ int main() {
     coutList(list_reverse);
     reverse(list_reverse);
     printf("reverse the two list: \n");
+    coutList(list_reverse);
+    printf("exchange the two list: \n");
+    exchangeNextTo(list_reverse);
     coutList(list_reverse);
     free(list_reverse);
     return 0;
