@@ -204,6 +204,73 @@ void deleteTailK(LinkList *list, int k) {
     free(temp);
 }
 
+LinkNode *getIntersectionNode(LinkList *list_a, LinkList *list_b) {
+    if (list_a == NULL || list_b == NULL) {
+        return NULL;
+    }
+    LinkNode *p_a = list_a->data;
+    LinkNode *p_b = list_b->data;
+    int len_a = 0;
+    int len_b = 0;
+    //得到两个链表的数据长度
+    while (p_a->next != NULL || p_b->next != NULL) {
+        if (p_a->next != NULL) {
+            p_a = p_a->next;
+            len_a++;
+        }
+        if (p_b->next != NULL) {
+            p_b = p_b->next;
+            len_b++;
+        }
+    }
+    printf("len_a is %d, len_b is %d\n", len_a, len_b);
+    //先让长的跑
+    LinkNode *longHead, *shortHead;
+    int len = abs(len_a - len_b);
+    if (len_a >= len_b) {
+        longHead = list_a->data;
+        shortHead = list_b->data;
+    }else {
+        shortHead = list_a->data;
+        longHead = list_b->data;
+    }
+    for (int i = 0; i < len; i++) {
+        longHead = longHead->next;
+    }
+    //在同一起跑线上进行判断
+    while (shortHead) {
+        if (shortHead == longHead) {
+            return shortHead;
+        }else {
+            shortHead = shortHead->next;
+            longHead = longHead->next;
+        }
+    }
+    return NULL;
+}
+
+LinkNode *createNode(int val) {
+    LinkNode *node = (LinkNode *)malloc(sizeof(LinkNode));
+    node->data = val;
+    node->next = NULL;
+    return node;
+}
+
+void dealListThree(LinkList *list_a, LinkList *list_b) {
+    LinkNode * link_node1 = createNode(5);
+    LinkNode * link_node2 = createNode(6);
+    LinkNode * link_node3 = createNode(7);
+    LinkNode * link_node4 = createNode(2);
+    LinkNode * link_node5 = createNode(4);
+    link_node1->next = link_node2;
+    link_node2->next = link_node3;
+    link_node3->next = link_node4;
+    link_node5->next = link_node3;
+    list_a->data->next = link_node1;
+    list_b->data->next = link_node5;
+}
+
+
 void printList(LinkNode *head) {
     LinkNode *current = head;
     while (current != NULL) {
@@ -282,6 +349,20 @@ int main() {
     printf("delete tail k :\n");
     deleteTailK(list_reverse, 2);
     coutList(list_reverse);
+
+    LinkList *list_a = createList();
+    LinkList *list_b = createList();
+    dealListThree(list_a, list_b);
+    printf("the list_a is:\n");
+    coutList(list_a);
+    printf("the list_b is:\n");
+    coutList(list_b);
+    LinkNode * intersection_node = getIntersectionNode(list_a, list_b);
+    if (intersection_node == NULL) {
+        printf("the two lists have't sample node.\n");
+    }else {
+        printf("the two lists have sample node: %d.", intersection_node->data);
+    }
     free(list_reverse);
     return 0;
 }
