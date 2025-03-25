@@ -3,6 +3,7 @@
 #include <string.h>
 
 #define MAX_STACK 100
+#define MAX_QUEUE 100
 
 typedef struct TreeNode {
     int data;
@@ -20,10 +21,46 @@ typedef struct Stack {
     int top;
 }Stack;
 
+typedef struct Queue {
+    TreeNode *data[MAX_QUEUE];
+    int front;
+    int rear;
+    int size;
+}Queue;
+
 Stack *initStack() {
     Stack *stack = (Stack *)malloc(sizeof(Stack));
     stack->top = -1;
     return stack;
+}
+
+//简单使用，不定义为循环队列
+Queue *initQueue() {
+    Queue *queue = (Queue *)malloc(sizeof(Queue));
+    queue->front = 0;
+    queue->rear = 0;
+    queue->size = 0;
+    return queue;
+}
+
+void inQueue(Queue *queue, TreeNode *node) {
+    if (queue == NULL || node == NULL) {
+        return;
+    }
+    if (queue->size == MAX_QUEUE) {
+        return;
+    }
+    queue->data[queue->rear++] = node;
+    queue->size++;
+}
+
+TreeNode *outQueue(Queue *queue) {
+    if (queue == NULL || queue->size == 0) {
+        return NULL;
+    }
+    TreeNode * tree_node = queue->data[queue->front++];
+    queue->size--;
+    return tree_node;
 }
 
 void push(Stack *stack, TreeNode *node) {
@@ -98,7 +135,7 @@ TreeNode **preBinary(TreeNode *root, int *returnSize) {
 
     int index = 0;
     TreeNode *p = root;
-    TreeNode **result = (TreeNode *)malloc(sizeof(TreeNode *) * MAX_STACK);
+    TreeNode **result = (TreeNode **)malloc(sizeof(TreeNode *) * MAX_STACK);
     Stack * stack = initStack();
     push(stack, p);
 
@@ -114,14 +151,14 @@ TreeNode **preBinary(TreeNode *root, int *returnSize) {
             push(stack, node->left_child);
         }
     }
-
+    free(stack);
     *returnSize = index;
     return result;
 }
 //迭代中序遍历
 TreeNode **inBinary(TreeNode *root, int *returnSize) {
     if (root == NULL) {
-        return ;
+        return NULL;
     }
     Stack * stack = initStack();
     TreeNode **result = (TreeNode **)malloc(sizeof(TreeNode *) * MAX_STACK);
@@ -142,6 +179,7 @@ TreeNode **inBinary(TreeNode *root, int *returnSize) {
 
     }
 
+    free(stack);
     *returnSize = index;
     return result;
 }
@@ -176,10 +214,34 @@ TreeNode **postBinary(TreeNode *root, int *len) {
             push(stack, cur->right_child);
         }
     }
+    free(stack);
     reveser(result, index);
     *len = index;
     return result;
+}
+//层序遍历（使用队列辅助）
+TreeNode **levelTraversal(TreeNode *root, int *returnSize) {
+    Queue * queue = initQueue();
+    TreeNode **result = (TreeNode **)malloc(sizeof(TreeNode *) * MAX_QUEUE);
+    int index = 0;
 
+    TreeNode *cur = root;
+    inQueue(queue, cur);
+    while (queue->size) {
+        //出队并加入到result中
+        TreeNode * out_queue = outQueue(queue);
+        result[index++] = out_queue;
+        //判断出队节点的左右孩子节点是否存在
+        if (out_queue->left_child) {
+            inQueue(queue, out_queue->left_child);
+        }
+        if (out_queue->right_child) {
+            inQueue(queue, out_queue->right_child);
+        }
+    }
+    free(queue);
+    *returnSize = index;
+    return result;
 }
 
 void coutStack(Stack *stack) {
@@ -238,6 +300,11 @@ int main(){
     for (int i = 0; i < len; i++) {
         printf("%d ", post_binary[i]->data);
     }
-
+    printf("\n");
+    printf("the level traversal is:\n");
+    TreeNode ** level_traversal = levelTraversal(init_tree->root, &len);
+    for (int i = 0; i < len; i++) {
+        printf("%d ", level_traversal[i]->data);
+    }
     return 0;
 }
