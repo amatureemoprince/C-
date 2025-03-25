@@ -1,5 +1,8 @@
 #include<stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define MAX_STACK 100
 
 typedef struct TreeNode {
     int data;
@@ -11,6 +14,37 @@ typedef struct Tree {
     TreeNode *root;
     int size;
 }Tree;
+
+typedef struct Stack {
+    TreeNode *data[MAX_STACK];
+    int top;
+}Stack;
+
+Stack *initStack() {
+    Stack *stack = (Stack *)malloc(sizeof(Stack));
+    stack->top = -1;
+    return stack;
+}
+
+void push(Stack *stack, TreeNode *node) {
+    if (stack == NULL) {
+        return ;
+    }
+    if (stack->top == MAX_STACK - 1) {
+        return ;
+    }
+    stack->data[++stack->top] = node;
+}
+//返回栈顶元素，并将栈的长度减一
+TreeNode *pop(Stack *stack) {
+    if (stack == NULL) {
+        return NULL;
+    }
+    if (stack->top < 0) {
+        return NULL;
+    }
+    return stack->data[stack->top--];
+}
 
 Tree *initTree() {
     Tree *tree = (Tree *)malloc(sizeof(Tree));
@@ -56,6 +90,111 @@ TreeNode *createNode(int val) {
     node->right_child = NULL;
     return node;
 }
+//迭代遍历二叉树
+TreeNode **preBinary(TreeNode *root, int *returnSize) {
+    if (root == NULL) {
+        return NULL;
+    }
+
+    int index = 0;
+    TreeNode *p = root;
+    TreeNode **result = (TreeNode *)malloc(sizeof(TreeNode *) * MAX_STACK);
+    Stack * stack = initStack();
+    push(stack, p);
+
+    //只要栈不为空
+    while (stack->top != -1) {
+        TreeNode * node = pop(stack);
+        result[index++] = node;
+        if (node->right_child) {
+            push(stack, node->right_child);
+        }
+
+        if (node->left_child) {
+            push(stack, node->left_child);
+        }
+    }
+
+    *returnSize = index;
+    return result;
+}
+//迭代中序遍历
+TreeNode **inBinary(TreeNode *root, int *returnSize) {
+    if (root == NULL) {
+        return ;
+    }
+    Stack * stack = initStack();
+    TreeNode **result = (TreeNode **)malloc(sizeof(TreeNode *) * MAX_STACK);
+    int index = 0;
+
+    TreeNode *cur = root;
+    while (cur != NULL || stack->top != -1) {
+        //遍历到最后一个左孩子节点
+        if (cur) {
+            push(stack, cur);
+            cur = cur->left_child;
+        }else {
+            //处理栈中的节点
+            cur = pop(stack);
+            result[index++] = cur;
+            cur = cur->right_child;
+        }
+
+    }
+
+    *returnSize = index;
+    return result;
+}
+
+void reveser(TreeNode **result, int index) {
+    int loop = index / 2;
+    TreeNode *temp;
+    for (int i = 0; i < loop; i++) {
+        temp = result[i];
+        result[i] = result[index - 1 - i];
+        result[index - 1 - i] = temp;
+    }
+}
+//后序遍历迭代遍历
+TreeNode **postBinary(TreeNode *root, int *len) {
+    if (root == NULL) {
+        return NULL;
+    }
+    Stack *stack = initStack();
+    int index = 0;
+    TreeNode **result = (TreeNode **)malloc(MAX_STACK * sizeof(TreeNode *));
+    TreeNode *cur = root;
+
+    push(stack, cur);
+    while (stack->top != -1) {
+        cur = pop(stack);
+        result[index++] = cur;
+        if (cur->left_child) {
+            push(stack, cur->left_child);
+        }
+        if (cur->right_child) {
+            push(stack, cur->right_child);
+        }
+    }
+    reveser(result, index);
+    *len = index;
+    return result;
+
+}
+
+void coutStack(Stack *stack) {
+    for (int i = 0; i <= stack->top; i++) {
+        printf("%d ", stack->data[i]);
+    }
+    printf("\n");
+}
+
+//测试
+void coutZ(TreeNode *node, TreeNode *other) {
+    printf("input node address is %0x\n", node);
+    node = other;
+}
+
 
 int main(){
     Tree * init_tree = initTree();
@@ -78,5 +217,27 @@ int main(){
     printf("\n");
     printf("the postTraversal is:\n");
     postTraversal(init_tree->root);
+    printf("\n");
+
+    int len;
+    TreeNode ** pre_binary = preBinary(init_tree->root, &len);
+    printf("the diedai pre traversal is:\n");
+    for (int i = 0; i < len; i++) {
+        printf("%d ", pre_binary[i]->data);
+    }
+    printf("\n");
+    printf("the diedai in traversal is:\n");
+    TreeNode ** in_binary = inBinary(init_tree->root, &len);
+    for (int i = 0; i < len; i++) {
+        printf("%d ", in_binary[i]->data);
+    }
+
+    printf("\n");
+    printf("the diedai post traversal is:\n");
+    TreeNode ** post_binary = postBinary(init_tree->root, &len);
+    for (int i = 0; i < len; i++) {
+        printf("%d ", post_binary[i]->data);
+    }
+
     return 0;
 }
