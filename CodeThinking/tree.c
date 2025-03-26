@@ -166,8 +166,8 @@ TreeNode **inBinary(TreeNode *root, int *returnSize) {
 
     TreeNode *cur = root;
     while (cur != NULL || stack->top != -1) {
-        //遍历到最后一个左孩子节点
         if (cur) {
+            //遍历到最后一个左孩子节点
             push(stack, cur);
             cur = cur->left_child;
         }else {
@@ -178,7 +178,6 @@ TreeNode **inBinary(TreeNode *root, int *returnSize) {
         }
 
     }
-
     free(stack);
     *returnSize = index;
     return result;
@@ -305,7 +304,29 @@ TreeNode ***levelOrderBottom(TreeNode *root, int *levelSize, int *lines) {
     }
     return result;
 }
+//返回最右侧的节点
+TreeNode **rightSideView(TreeNode *root, int *len) {
+    if (root == NULL) {
+        return NULL;
+    }
+    TreeNode **result = NULL;
+    TreeNode *cur = root;
+    int treeHight = 0;
 
+    //初始化一个栈并将cur入栈
+    Queue *queue = initQueue();
+    inQueue(queue, cur);
+    while (queue->size != 0) {
+        TreeNode * out_queue = outQueue(queue);
+        result = realloc(result, sizeof(TreeNode *) * treeHight + 1);
+        result[treeHight++] = out_queue;
+        if (out_queue->right_child) {
+            inQueue(queue, out_queue->right_child);
+        }
+    }
+    *len = treeHight;
+    return result;
+}
 
 
 
@@ -320,6 +341,13 @@ void coutStack(Stack *stack) {
 void coutZ(TreeNode *node, TreeNode *other) {
     printf("input node address is %0x\n", node);
     node = other;
+}
+
+void printNodeData(TreeNode **right_side_view, int len) {
+    for (int i = 0; i < len; i++) {
+        printf("%d ", right_side_view[i]->data);
+    }
+    printf("\n");
 }
 
 void coutY(int *arr, int len) {
@@ -346,64 +374,70 @@ int main(){
     tree_node2->left_child = tree_node4;
     tree_node3->right_child = tree_node5;
 
-    printf("the preTraversal is:\n");
-    preorderTraversal(init_tree->root);
-    printf("\n");
-    printf("the inTraversal is:\n");
-    inTraversal(init_tree->root);
-    printf("\n");
-    printf("the postTraversal is:\n");
-    postTraversal(init_tree->root);
-    printf("\n");
-
     int len;
-    TreeNode ** pre_binary = preBinary(init_tree->root, &len);
-    printf("the diedai pre traversal is:\n");
-    for (int i = 0; i < len; i++) {
-        printf("%d ", pre_binary[i]->data);
-    }
-    printf("\n");
-    printf("the diedai in traversal is:\n");
-    TreeNode ** in_binary = inBinary(init_tree->root, &len);
-    for (int i = 0; i < len; i++) {
-        printf("%d ", in_binary[i]->data);
-    }
+    TreeNode ** right_side_view = rightSideView(init_tree->root, &len);
+    printNodeData(right_side_view, len);
 
-    printf("\n");
-    printf("the diedai post traversal is:\n");
-    TreeNode ** post_binary = postBinary(init_tree->root, &len);
-    for (int i = 0; i < len; i++) {
-        printf("%d ", post_binary[i]->data);
-    }
-    printf("\n");
-    printf("the level traversal is:\n");
-    TreeNode ** level_traversal = levelTraversal(init_tree->root, &len);
-    for (int i = 0; i < len; i++) {
-        printf("%d ", level_traversal[i]->data);
-    }
-    printf("\n");
-    printf("test:\n");
-    int arr[] = {0, 1, 2, 3};
-    coutY(arr, 4);
-    for (int i = 0; i < 4; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
-    // TODO: 从下到上遍历
-    int levelSize[] = {0};
-    int lines = 0;
-    TreeNode *** level_order_bottom = levelOrderBottom(init_tree->root, levelSize, &lines);
-    printf("the lines is: %d\n", lines);
 
-    printf("from buttom to the top is: \n");
-    printf("[");
-    for (int i = 0; i < lines; i++) {
-        printf(" [");
-        for (int j = 0; j < levelSize[i]; j++) {
-            printf(" %d ", level_order_bottom[i][j]->data);
-        }
-        printf("] ");
-    }
-    printf("]\n");
+    // printf("the preTraversal is:\n");
+    // preorderTraversal(init_tree->root);
+    // printf("\n");
+    // printf("the inTraversal is:\n");
+    // inTraversal(init_tree->root);
+    // printf("\n");
+    // printf("the postTraversal is:\n");
+    // postTraversal(init_tree->root);
+    // printf("\n");
+    //
+    // int len;
+    // TreeNode ** pre_binary = preBinary(init_tree->root, &len);
+    // printf("the diedai pre traversal is:\n");
+    // for (int i = 0; i < len; i++) {
+    //     printf("%d ", pre_binary[i]->data);
+    // }
+    // printf("\n");
+    // printf("the diedai in traversal is:\n");
+    // TreeNode ** in_binary = inBinary(init_tree->root, &len);
+    // for (int i = 0; i < len; i++) {
+    //     printf("%d ", in_binary[i]->data);
+    // }
+    //
+    // printf("\n");
+    // printf("the diedai post traversal is:\n");
+    // TreeNode ** post_binary = postBinary(init_tree->root, &len);
+    // for (int i = 0; i < len; i++) {
+    //     printf("%d ", post_binary[i]->data);
+    // }
+    // printf("\n");
+    // printf("the level traversal is:\n");
+    // TreeNode ** level_traversal = levelTraversal(init_tree->root, &len);
+    // for (int i = 0; i < len; i++) {
+    //     printf("%d ", level_traversal[i]->data);
+    // }
+    // printf("\n");
+    // printf("test:\n");
+    // int arr[] = {0, 1, 2, 3};
+    // coutY(arr, 4);
+    // for (int i = 0; i < 4; i++) {
+    //     printf("%d ", arr[i]);
+    // }
+    // printf("\n");
+    // // TODO: 从下到上遍历
+    // int levelSize[] = {0};
+    // int lines = 0;
+    // TreeNode *** level_order_bottom = levelOrderBottom(init_tree->root, levelSize, &lines);
+    // printf("the lines is: %d\n", lines);
+    //
+    // printf("from buttom to the top is: \n");
+    // printf("[");
+    // for (int i = 0; i < lines; i++) {
+    //     printf(" [");
+    //     for (int j = 0; j < levelSize[i]; j++) {
+    //         printf(" %d ", level_order_bottom[i][j]->data);
+    //     }
+    //     printf("] ");
+    // }
+    // printf("]\n");
+
     return 0;
 }
