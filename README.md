@@ -3,6 +3,6 @@
 
 我将从各种数据结构的定义到进阶的运用，一步一步地提高自己的编码能力。
 
-在这个仓库里只存在代码和部分解释，如果需要题目描述，请访问[语雀【数据结构知识库】](https://www.yuque.com/g/yuqueyonghu71tocz/nelr8w/collaborator/join?token=44FjLD5O4umcN9Cy&source=book_collaborator# 《数据结构》)
+在这个仓库里只存在代码和部分解释，如果需要题目描述，请访问[《数据结构》](https://www.yuque.com/g/yuqueyonghu71tocz/nelr8w/collaborator/join?token=44FjLD5O4umcN9Cy&source=book_collaborator#)
 
 这是我在语雀中记录的一下代码题和笔记，有需要的可以点击查看！
