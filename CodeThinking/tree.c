@@ -244,6 +244,71 @@ TreeNode **levelTraversal(TreeNode *root, int *returnSize) {
     return result;
 }
 
+void reverseT(TreeNode ***arr, int len) {
+    if (arr == NULL || len <= 1) {
+        return;
+    }
+
+    int p = len - 1;
+    for (int i = 0; i < len / 2; i++) {
+        TreeNode **temp = arr[i];
+        arr[i] = arr[p - i];
+        arr[p - i] = temp;
+    }
+}
+
+//从下面到上面进行层序遍历：root为遍历树的根，levelSize为每一层的长度，lines为共有多少层
+TreeNode ***levelOrderBottom(TreeNode *root, int *levelSize, int *lines) {
+    if (root == NULL) {
+        *lines = 0;
+        return NULL;
+    }
+    //初始化标记
+    //每层的元素个数和用于遍历存储位置的index
+    int level, levelIndex = 0;
+    //初始化队列
+    Queue *queue = initQueue();
+    //头结点入队列
+    TreeNode *cur = root;
+    inQueue(queue, cur);
+    //声明返回的result：动态分配内存
+    TreeNode ***result = NULL;
+    //遍历每一层
+    while (queue->size != 0) {
+        //存储该层的节点个数
+        level = queue->size;
+        levelSize[levelIndex] = level;
+        //将该层的元素存储到一个一维数组中
+        TreeNode **lineElements = (TreeNode **)malloc(sizeof(TreeNode *) * level);
+        for (int i = 0; i < level; i++) {
+            TreeNode * out_queue = outQueue(queue);
+            lineElements[i] = out_queue;
+            if (out_queue->left_child) {
+                inQueue(queue, out_queue->left_child);
+            }
+            if (out_queue->right_child) {
+                inQueue(queue, out_queue->right_child);
+            }
+        }
+        //将一层的元素加入到result中
+        result = (TreeNode ***)realloc(result, sizeof(TreeNode **) * (levelIndex + 1));
+        result[levelIndex++] = lineElements;
+    }
+    *lines = levelIndex;
+    //将遍历得到的结果反转
+    reverseT(result, levelIndex);
+    int len = levelIndex - 1;
+    for (int i = 0; i < levelIndex / 2; i++) {
+        int temp = levelSize[i];
+        levelSize[i] = levelSize[len - i];
+        levelSize[len - i] = temp;
+    }
+    return result;
+}
+
+
+
+
 void coutStack(Stack *stack) {
     for (int i = 0; i <= stack->top; i++) {
         printf("%d ", stack->data[i]);
@@ -255,6 +320,16 @@ void coutStack(Stack *stack) {
 void coutZ(TreeNode *node, TreeNode *other) {
     printf("input node address is %0x\n", node);
     node = other;
+}
+
+void coutY(int *arr, int len) {
+    for (int i = 2; i < 2 + len; i++) {
+        arr[i - 2] = i;
+    }
+    for (int i = 0; i < len; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
 }
 
 
@@ -306,5 +381,29 @@ int main(){
     for (int i = 0; i < len; i++) {
         printf("%d ", level_traversal[i]->data);
     }
+    printf("\n");
+    printf("test:\n");
+    int arr[] = {0, 1, 2, 3};
+    coutY(arr, 4);
+    for (int i = 0; i < 4; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    // TODO: 从下到上遍历
+    int levelSize[] = {0};
+    int lines = 0;
+    TreeNode *** level_order_bottom = levelOrderBottom(init_tree->root, levelSize, &lines);
+    printf("the lines is: %d\n", lines);
+
+    printf("from buttom to the top is: \n");
+    printf("[");
+    for (int i = 0; i < lines; i++) {
+        printf(" [");
+        for (int j = 0; j < levelSize[i]; j++) {
+            printf(" %d ", level_order_bottom[i][j]->data);
+        }
+        printf("] ");
+    }
+    printf("]\n");
     return 0;
 }
