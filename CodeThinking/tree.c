@@ -5,12 +5,19 @@
 
 #define MAX_STACK 100
 #define MAX_QUEUE 100
+#define N 4
 
 typedef struct TreeNode {
     int data;
     struct TreeNode *left_child;
     struct TreeNode *right_child;
 }TreeNode;
+
+typedef struct TreeNodeN {
+    int data;
+    struct TreeNodeN *child[N];
+    int child_size;
+};
 
 typedef struct Tree {
     TreeNode *root;

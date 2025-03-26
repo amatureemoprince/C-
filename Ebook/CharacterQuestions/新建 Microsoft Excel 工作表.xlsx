@@ -1,0 +1,60 @@
+#include<stdio.h>
+#define MAX_SIZE 10
+
+/**
+ * 并查集的查找、合并、压缩路径 
+ */
+
+int fa[MAX_SIZE];
+void init(){
+	int i;
+	for(i = 0; i < MAX_SIZE; i++){
+		fa[i] = -1;
+	}
+}
+
+int find(int x){
+	if(fa[x] < 0){
+		return x;
+	}
+	return find(fa[x]);
+}
+
+int zip(int x){
+	if(fa[x] < 0){
+		return x;
+	}
+	return fa[x] = zip(fa[x]);	
+}
+
+void merge(int i, int j){
+	if(find(i) == find(j)){
+		return ;
+	}	
+	fa[find(j)] = find(i);
+}
+int main(void){
+	init();
+	int i;
+	for(i = 0; i < MAX_SIZE; i++){
+		printf("%d ", fa[i]);
+	}
+	printf("\n");
+	
+	merge(0, 1);
+	merge(2, 3);
+	merge(2, 4);
+	merge(4, 5);
+	merge(1, 2); 
+	for(i = 0; i < MAX_SIZE; i++){
+		printf("%d ", fa[i]);
+	}
+	
+	printf("\n");
+	printf("the 4 parent node's index is %d\n", zip(4));
+	
+	for(i = 0; i < MAX_SIZE; i++){
+		printf("%d ", fa[i]);
+	}
+}
+
