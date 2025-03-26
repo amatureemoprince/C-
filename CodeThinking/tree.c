@@ -1,4 +1,6 @@
 #include <inttypes.h>
+#include <math.h>
+#include <pthread_time.h>
 #include<stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,12 +14,12 @@ typedef struct TreeNode {
     struct TreeNode *left_child;
     struct TreeNode *right_child;
 }TreeNode;
-
+//定义N叉树
 typedef struct TreeNodeN {
     int data;
     struct TreeNodeN *child[N];
     int child_size;
-};
+}TreeNodeN;
 
 typedef struct Tree {
     TreeNode *root;
@@ -335,7 +337,7 @@ TreeNode **rightSideView(TreeNode *root, int *len) {
     *len = treeHight;
     return result;
 }
-
+//统计每行元素的平均值
 double *averageOfLevels(TreeNode *root, int *len) {
     if (root == NULL) {
         return ;
@@ -373,7 +375,45 @@ double *averageOfLevels(TreeNode *root, int *len) {
     *len = treeHight;
     return result;
 }
-
+//统计N叉树的每行元素：思路和二叉树的一致: 因为不再重复的写不同的Queue，故直接使用TreeNode的Queue
+// TreeNodeN ***levelOrder(TreeNodeN *root, int *returnSize) {
+//     if (root == NULL) {
+//         return NULL;
+//     }
+//     //声明返回的result，存储每行的元素
+//     TreeNodeN ***result = NULL;
+//     //声明队列并将根节点入栈
+//     Queue *queue = initQueue();
+//     inQueue(queue, root);
+//     //声明变量
+//     //层数
+//     int treeHight = 0;
+//     //每行的index
+//     int levelIndex = 0;
+//     //每行元素的个数
+//     int nums = 0;
+//     while (queue->size != 0) {
+//         levelIndex = 0;
+//         nums = queue->size;
+//         //声明存储每一层元素的值
+//         TreeNodeN **level_elements = (TreeNodeN **)malloc(sizeof(TreeNodeN *) * nums);
+//         //处理每一行
+//         for (int i = 0; i < nums; i++) {
+//             TreeNodeN * out_queue = outQueue(queue);
+//             level_elements[levelIndex++] = out_queue;
+//             //只要存在孩子就要入队列
+//             for (int j = 0; j < out_queue->child_size; j++) {
+//                 if (out_queue->child[i]) {
+//                     inQueue(out_queue->child[i]);
+//                 }
+//             }
+//         }
+//         result = (TreeNodeN ***)realloc(result, sizeof(TreeNodeN **) * (treeHight + 1));
+//         result[treeHight++] = level_elements;
+//     }
+//     *returnSize = treeHight;
+//     return result;
+// }
 
 void coutStack(Stack *stack) {
     for (int i = 0; i <= stack->top; i++) {
