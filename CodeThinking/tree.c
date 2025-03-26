@@ -1,3 +1,4 @@
+#include <inttypes.h>
 #include<stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -328,6 +329,43 @@ TreeNode **rightSideView(TreeNode *root, int *len) {
     return result;
 }
 
+double *averageOfLevels(TreeNode *root, int *len) {
+    if (root == NULL) {
+        return ;
+    }
+    //声明队列
+    Queue *queue = initQueue();
+    TreeNode *cur = root;
+    inQueue(queue, cur);
+    //返回的double数组
+    double *result = NULL;
+    int treeHight = 0;
+    int level = 0;
+    double averge = 0;
+
+    while (queue->size != 0) {
+        //得到每一层的长度
+        level = queue->size;
+        //声明每层元素值和
+        int total = 0;
+        for (int i = 0; i < level; i++) {
+            TreeNode * out_queue = outQueue(queue);
+            total += out_queue->data;
+            //入栈out_queue的孩子节点
+            if (out_queue->left_child) {
+                inQueue(queue, out_queue->left_child);
+            }
+            if (out_queue->right_child) {
+                inQueue(queue, out_queue->right_child);
+            }
+        }
+        //计算平均值并加入到result中
+        result = (TreeNode **)realloc(result, sizeof(TreeNode *) * (treeHight + 1));
+        result[treeHight++] = (total + 0.0) / level;
+    }
+    *len = treeHight;
+    return result;
+}
 
 
 void coutStack(Stack *stack) {
@@ -376,9 +414,14 @@ int main(){
 
     int len;
     TreeNode ** right_side_view = rightSideView(init_tree->root, &len);
+    printf("the tree right view is:\n");
     printNodeData(right_side_view, len);
-
-
+    printf("the average num is: \n");
+    double * average_of_levels = averageOfLevels(init_tree->root, &len);
+    for (int i = 0; i < len; i++) {
+        printf("%.2f ", average_of_levels[i]);
+    }
+    printf("\n");
     // printf("the preTraversal is:\n");
     // preorderTraversal(init_tree->root);
     // printf("\n");
