@@ -1,8 +1,7 @@
-#include "global.c"
+#include "global_methods.c"
 
 void insert_sort(int *arr, int len);
 void insert_half_sort(int *arr, int len);
-void coutArray(int *arr, int len);
 
 //插入排序:2, 4, 3, 6, 9, 0, 2, 8
 void insert_sort(int *arr, int len) {
