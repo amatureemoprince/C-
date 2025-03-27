@@ -1,7 +1,4 @@
-#include <stdarg.h>
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "global.c"
 
 void insert_sort(int *arr, int len);
 void insert_half_sort(int *arr, int len);
@@ -92,12 +89,6 @@ void insert_half_sort(int *arr, int len) {
     }
 }
 
-void coutArray(int *arr, int len) {
-    for (int i = 0; i < len; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
-}
 
 int main(){
     int arr[8] = {2, 4, 3, 6, 9, 0, 2, 8};
