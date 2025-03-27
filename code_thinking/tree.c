@@ -264,6 +264,7 @@ void reverseT(TreeNode ***arr, int len) {
         arr[i] = arr[p - i];
         arr[p - i] = temp;
     }
+
 }
 
 //从下面到上面进行层序遍历：root为遍历树的根，levelSize为每一层的长度，lines为共有多少层
@@ -414,6 +415,42 @@ double *averageOfLevels(TreeNode *root, int *len) {
 //     *returnSize = treeHight;
 //     return result;
 // }
+
+//从每一层中找最大的一个元素
+int *largestValues(TreeNode *root, int *return_size) {
+    if (root == NULL) {
+        return 0;
+    }
+    int *result = NULL;
+    Queue *queue = initQueue();
+    TreeNode *cur = root;
+    inQueue(queue, cur);
+    int level_size = 0;
+    int level_index = 0;
+
+    while (queue->size != 0) {
+        //记录该层有几个元素
+        level_size = queue->size;
+        int max = INT_MIN;
+        //得到一层中最大的值
+        for (int i = 0; i < level_size; i++) {
+            TreeNode * out_queue = outQueue(queue);
+            if (out_queue->data > max) {
+                max = out_queue->data;
+            }
+            if (out_queue->left_child) {
+                inQueue(queue, out_queue->left_child);
+            }
+            if (out_queue->right_child) {
+                inQueue(queue, out_queue->right_child);
+            }
+        }
+        result = (int *)realloc(result, sizeof(int) * (level_index + 1));
+        result[level_index++] = max;
+    }
+    *return_size = level_index;
+    return result;
+}
 
 void coutStack(Stack *stack) {
     for (int i = 0; i <= stack->top; i++) {
