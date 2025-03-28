@@ -3,22 +3,20 @@
 int partition(int *arr, int low, int height) {
     //将小于基准元素的值都移动到low指向的位置
     int privot = arr[low];
-    int i = low + 1, j = height;
-    while (i < j) {
-        while (i < j && arr[j] >= privot) {
-            j--;
+    while (low < height) {
+        while (low < height && arr[height] >= privot) {
+            height--;
         }
-        while (i < j && arr[i] <= privot) {
-            i++;
+        if (low < height)
+            arr[low] = arr[height];
+        while (low < height && arr[low] <= privot) {
+            low++;
         }
-        int temp = arr[j];
-        arr[j] = arr[i];
-        arr[i] = temp;
+        if (low < height)
+            arr[height] = arr[low];
     }
-    int temp = arr[low];
-    arr[low] = arr[i];
-    arr[i] = temp;
-    return i;
+    arr[low] = privot;
+    return low;
 }
 //快速排序
 void quick_sort(int *arr, int low, int height){
