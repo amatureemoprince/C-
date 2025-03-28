@@ -9,7 +9,7 @@ void insert_sort(int *arr, int len) {
         return ;
     }
     if (len == 1) {
-        return arr;
+        return ;
     }
     int i = 1, j, cur;
     //遍历从第一个元素开始的每个元素
