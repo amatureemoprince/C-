@@ -1,10 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
 //定义AVL节点
 typedef struct AVL_TREE {
-    int data;
-    int height;
+    int key;
+    int high;
     struct AVL_TREE *left;
     struct AVL_TREE *right;
 }AVL_TREE_NODE;
+
+//初始化一个虚拟空节点NIL
+AVL_TREE_NODE __NIL;
+#define NIL (&__NIL)
+__attribute__((constructor))
+void init_NIL() {
+    printf("init the NIL node!");
+    NIL->key = -1;
+    NIL->high = 0;
+    NIL->left = NIL->right = NIL;
+    return ;
+}
+
+//初始化节点
+AVL_TREE_NODE *init_avl_tree(){
+    AVL_TREE_NODE *avl_tree = (AVL_TREE_NODE *)malloc(sizeof(AVL_TREE_NODE));
+    avl_tree->high = 0;
+    return avl_tree;
+}
+
+AVL_TREE_NODE *new_avl_tree_node(int key) {
+    AVL_TREE_NODE *avl_tree_node = (AVL_TREE_NODE *)malloc(sizeof(AVL_TREE_NODE));
+    avl_tree_node->key = key;
+    avl_tree_node->left = avl_tree_node->right = NULL;
+    return avl_tree_node;
+}
 
 //定义右旋操作
 void LL(AVL_TREE_NODE *root) {
@@ -30,7 +58,15 @@ void LR(AVL_TREE_NODE *root) {
 void RL(AVL_TREE_NODE *root) {
 
 }
-//初始化一颗AVL树
-AVL_TREE_NODE *init_avl_tree(){
+//销毁操作
+void destroy_avl_tree(AVL_TREE_NODE *root) {
+    if (root == NIL) {
+        return;
+    }
+    free(root->left);
+    free(root->right);
+}
 
+int main(){
+  return 0;
 }
