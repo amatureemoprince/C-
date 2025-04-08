@@ -1,10 +1,14 @@
-#define MAX_ADJ_V 100
+#define DIF INT_MIN
+#define EXPANSION_TIME 2
+#include "../ds/queue.c"
+#include <stdatomic.h>
+#include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 //使用邻接矩阵构造图：使用无向图
 //使用1表示有边，0表示没有边
 typedef struct GRAPH_ADJ_MATRIX {
-    //当前容量
-    int cap;
+    int capacity;
     //定义顶点和边的数量
     int numsV;
     int numsE;
@@ -14,152 +18,310 @@ typedef struct GRAPH_ADJ_MATRIX {
     int **E;
 }GRAPH_ADJ_MATRIX;
 
+/**
+ * @description 初始化邻接矩阵图
+ * 最大容量为cap的两倍
+ * 边权值为INT_MIN代表两结点之间不存在边
+ * @param cap 初始化结点数量
+ * @return 图
+ */
+GRAPH_ADJ_MATRIX *init_adj_matrix_graph(int cap);
 
-int adj_matrix_expansion(GRAPH_ADJ_MATRIX *graph);
+/**
+ * @description 向图中插入一条边并设置权值
+ * @param graph 图
+ * @param index_x 第x个结点
+ * @param index_y 第y个结点
+ * @param power_weight 权值
+ */
+void insert_e_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph, int index_x, int index_y, int power_weight);
 
-int have_e_adj_matrix(GRAPH_ADJ_MATRIX *graph, int x, int y);
+/**
+ * @description 插入一个结点（按照递增插入）
+ * @param graph 图
+ */
+void insert_v_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph);
 
-int insert_adj_matrix_v(GRAPH_ADJ_MATRIX *graph, int val);
+/**
+ * @description 删除图中的一个结点
+ * @param x 要删除的结点x
+ * @param graph 图
+ */
+void delete_v_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph, int x);
 
-GRAPH_ADJ_MATRIX *init_graph_adj_matrix(int initNum);
+/**
+ * @description 广度遍历图
+ * @param graph 图
+ * @param node_index 开始结点
+ */
+void bfs_traverse_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph, int node_index);
 
-//初始图
-//边数开始为0，每个结点初始化为i+1，数量为numV，numV为传入的要初始化的initNum。
-//分配的内存要为cap，初始化的结点数可能小于cap
-GRAPH_ADJ_MATRIX *init_graph_adj_matrix(int initNum) {
+/**
+ * @description 对邻接矩阵图扩容
+ * @param graph 图
+ * @return 1为成功，0为失败
+ */
+int expansion_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph);
+
+/**
+ * @description dfs邻接矩阵图
+ * @param start_node 开始的结点
+ * @param visited 访问数组
+ * @param graph 图
+ */
+void dfs_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph, bool *visited, int start_node);
+
+/**
+ * @description 深度遍历图
+ * @param graph 图
+ */
+void dfs_traverse_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph);
+
+/**
+ * @description 打印邻接矩阵图的信息
+ * @param graph 图
+ */
+void printf_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph);
+
+/**
+ * @description 销毁邻接矩阵图
+ * @param graph 图
+ */
+void destroy_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph);
+
+/**
+ * @description 获取v中val的索引值
+ * @param v v数组
+ * @param val 值
+ * @param len v的长度
+ * @return val对应的index
+ */
+int get_v_index_adj_matrix_graph_v(int *v, int val, int len);
+
+GRAPH_ADJ_MATRIX *init_adj_matrix_graph(int cap) {
     GRAPH_ADJ_MATRIX *graph = (GRAPH_ADJ_MATRIX *)malloc(sizeof(GRAPH_ADJ_MATRIX));
     graph->numsE = 0;
-    graph->numsV = initNum;
-    graph->cap = (initNum > MAX_ADJ_V) ? initNum : MAX_ADJ_V;
-    graph->V = (int *)malloc(sizeof(int) * graph->cap);
-    graph->E = (int **)malloc(sizeof(int *) * graph->cap);
-    for (int i = 0; i < graph->cap; i++) {
-        graph->E[i] = (int *)malloc(sizeof(int) * graph->cap);
+    //容量设置为初始化的2倍
+    graph->capacity = EXPANSION_TIME * cap;
+    graph->numsV = cap;
+    //初始化存储结点和边的空间
+    graph->V = (int *)malloc(sizeof(int) * graph->capacity);
+    graph->E = (int **)malloc(sizeof(int *) * graph->capacity);
+    for (int i = 0; i < graph->capacity; i++) {
+        graph->E[i] = (int *)malloc(sizeof(int) * graph->capacity);
     }
-    //初始化所有顶点值
+    //初始化结点值和结点之间的边
     for (int i = 0; i < graph->numsV; i++) {
+        //初始化结点值
         graph->V[i] = i;
-    }
-    //初始化所有顶点之间没有边
-    for (int i = 0; i < graph->numsV; i++) {
         for (int j = 0; j < graph->numsV; j++) {
-            graph->E[i][j] = 0;
+            graph->E[i][j] = DIF;
         }
     }
     return graph;
 }
 
-
-/**
- * @description 判断两个结点之间是否存在边
- *
- * @param graph 邻接图
- * @param x 索引为x的结点
- * @param y 索引为y的结点
- * @return 1为存在边，0为不存在边
- */
-int have_e_adj_matrix(GRAPH_ADJ_MATRIX *graph, int x, int y) {
-    return graph->E[x][y] == 1 ? 1 : 0;
+void insert_e_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph, int x, int y, int power_weight) {
+    int index_x = get_v_index_adj_matrix_graph_v(graph->V, x, graph->numsV);
+    int index_y = get_v_index_adj_matrix_graph_v(graph->V, y, graph->numsV);
+    if (index_x < 0 || index_y < 0) {
+        printf("the param has error!\n");
+        return ;
+    }
+    graph->E[index_x][index_y] = power_weight;
+    graph->E[index_y][index_x] = power_weight;
+    graph->numsE++;
 }
 
-
-/**
- * @description 邻接矩阵图扩容操作
- * @param graph 图
- * @return 1为扩容成功，0为扩容失败
- */
-int adj_matrix_expansion(GRAPH_ADJ_MATRIX *graph) {
-    int new_cap = graph->cap * 2;
-    int *new_V = (int *)realloc(graph->V, sizeof(int) * new_cap);
-    if (new_V == NULL) {
+int expansion_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph) {
+    int new_capacity = graph->capacity * EXPANSION_TIME;
+    int * new_v = realloc(graph->V, sizeof(int) * new_capacity);
+    if (new_v == NULL) {
         return 0;
     }
-    graph->V = new_V;
-    int **new_E = (int **)realloc(graph->E, sizeof(int*) * new_cap);
-    if (new_E == NULL) {
+    graph->V = new_v;
+    int **new_e = realloc(graph->E, sizeof(int *) * new_capacity);
+    if (new_e == NULL) {
         return 0;
     }
-    graph->E = new_E;
-    for (int i = 0; i < new_cap; i++) {
-        int *new_E_i = (int *)malloc(sizeof(int) * new_cap);
-        if (new_E_i == NULL) {
+    graph->E = new_e;
+    for (int i = 0; i < new_capacity; i++) {
+        int *new_e_i = (int *)malloc(sizeof(int) * new_capacity);
+        if (new_e_i == NULL) {
             for (int j = 0; j < i; j++) {
                 free(graph->E[j]);
             }
             return 0;
         }
-        graph->E[i] = new_E_i;
+        graph->E[i] = new_e_i;
     }
     return 1;
 }
 
-/**
- * @description 邻接矩阵图插入新的结点
- * @param graph 图
- * @param val 结点值
- * @return int 1为成功插入，0为失败插入
- */
-int insert_adj_matrix_v(GRAPH_ADJ_MATRIX *graph, int val) {
-    if (graph->numsV + 1 > graph->cap) {
-        if (!adj_matrix_expansion(graph)) {
-            return 0;
-        }
-    }
-    graph->V[graph->numsV] = val;
-    graph->numsV++;
-    return 1;
-}
-/**
- * @description 邻接矩阵图添加一条边
- * @param graph 图
- * @param x 索引为x的结点
- * @param y 索引为y的结点
- * @return 1为添加边成功，0则失败
- */
-int add_adj_matrix_e(GRAPH_ADJ_MATRIX *graph, int x, int y) {
-    if (x > graph->cap || x < 0 || y > graph->cap || graph < 0) {
-        return 0;
-    }
-    graph->E[x][y] = 1;
-    graph->E[y][x] = 1;
-    graph->numsE++;
-    return 1;
-}
-
-/**
- * @description 获取邻接矩阵表索引为v的结点的相邻结点索引数组
- * @param graph 图
- * @param v 索引为v的结点
- * @param len 返回结果数组长度
- * @return 与之有边的顶点索引值
- */
-int *get_e_by_v_adj_matrix(GRAPH_ADJ_MATRIX *graph, int v, int *len) {
-    int *result = (int *)malloc(sizeof(int) * graph->cap);
-    int resultIndex = 0;
-    //遍历一行或者一列则可
+void dfs_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph, bool *visited, int start_node) {
+    printf("%d ", start_node);
+    visited[start_node] = true;
     for (int i = 0; i < graph->numsV; i++) {
-        if (graph->E[v][i] == 1) {
-            result[resultIndex++] = i;
+        if (graph->E[start_node][i] != DIF && !visited[i]) {
+            dfs_adj_matrix_graph(graph, visited, i);
         }
     }
-    (*len) = resultIndex;
+}
+
+void dfs_traverse_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph) {
+    bool visited[graph->numsV];
+    for (int i = 0; i < graph->numsV; i++) {
+        visited[i] = false;
+    }
+    for (int i = 0; i < graph->numsV; i++) {
+        if (!visited[i]) {
+            dfs_adj_matrix_graph(graph, visited, i);
+        }
+    }
+    printf("\n");
+}
+
+void insert_v_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph) {
+    //如果结点数量大于最大容量了
+    if (graph->numsV + 1 > graph->capacity) {
+        if (!expansion_adj_matrix_graph(graph)) {
+            return ;
+        }
+    }
+    //获取到最大的节点值
+    int max_node = graph->V[graph->numsV - 1];
+    graph->V[graph->numsV] = max_node + 1;
+    //处理边
+    for (int i = 0; i < graph->numsV + 1; i++) {
+        if (i < graph->numsV) {
+            graph->E[i][graph->numsV] = DIF;
+        }
+        graph->E[graph->numsV][i] = DIF;
+    }
+    graph->numsV++;
+}
+
+int get_v_index_adj_matrix_graph_v(int *v, int val, int len) {
+    int result = -1;
+    for (int i = 0; i < len; i++) {
+        if (v[i] == val) {
+            result = i;
+            break;
+        }
+    }
     return result;
 }
-/**
- * @description 销毁邻接矩阵图
- * @param graph 图
- */
-void destroy_adj_matrix(GRAPH_ADJ_MATRIX *graph) {
+
+void delete_v_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph, int x) {
+    int index_x = get_v_index_adj_matrix_graph_v(graph->V, x, graph->numsV);
+    if (index_x < 0 || graph->numsV == 0) {
+        return;
+    }
+    //统计要删除的结点上有几条边
+    int e = 0;
+    for (int i = 0; i < graph->numsV; i++) {
+        if (graph->E[index_x][i] != DIF) {
+            e++;
+        }
+    }
+    //移动v中的数据
+    for (int i = index_x; i < graph->numsV - 1; i++) {
+        graph->V[i] = graph->V[i + 1];
+    }
+    //移动e中的数据
+    for (int i = index_x; i < graph->numsV - 1; i++) {
+        for (int j = 0; j < graph->numsV; j++) {
+            graph->E[j][i] = graph->E[j][i + 1];
+        }
+    }
+    for (int i = index_x; i < graph->numsV - 1; i++) {
+        for (int j = 0; j < graph->numsV; j++) {
+            graph->E[i][j] = graph->E[i + 1][j];
+        }
+    }
+    //改变图的信息
+    graph->numsV--;
+    graph->numsE = graph->numsE - e;
+}
+
+void bfs_traverse_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph, int node_index) {
+    Queue * queue = init_queue();
+    bool visited[graph->numsV];
+    for (int i = 0; i < graph->numsV; i++) {
+        visited[i] = false;
+    }
+    in_queue(queue, node_index);
+    visited[node_index] = true;
+    while (queue->rear != queue->front) {
+        int out_val = out_queue(queue);
+        printf("%d ", out_val);
+        for (int i = 0; i < graph->numsV; i++) {
+            if (graph->E[out_val][i] != DIF && !visited[i]) {
+                in_queue(queue, i);
+                visited[i] = true;
+            }
+        }
+    }
+}
+
+void printf_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph) {
+    //打印节点信息
+    printf("the adj_matrix_graph has number %d points, v are: \n", graph->numsV);
+    for (int i = 0; i < graph->numsV; i++) {
+        printf("%d ", graph->V[i]);
+    }
+    printf("\n");
+    printf("the adj_matrix_graph's e are: \n");
+    for (int i = 0; i < graph->numsV; i++) {
+        for (int j = 0; j < graph->numsV; j++) {
+            //如果一条边是有意义的，则进行输出权值和对应的结点
+            if (graph->E[i][j] != DIF) {
+                printf("%d --- %d : the power-weight is %d\n", graph->V[i], graph->V[j], graph->E[i][j]);
+            }
+        }
+    }
+    printf("\n");
+}
+
+void destroy_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph) {
     if (graph == NULL) {
         return;
     }
-    for (int i = 0; i < graph->numsV; i++) {
+    for (int i = 0; i < graph->capacity; i++) {
         free(graph->E[i]);
     }
     free(graph->E);
     free(graph->V);
     free(graph);
 }
+
+void printf_info_adj_matrix_graph(char *s) {
+    printf("================================== %s ==================================\n", s);
+}
 int main(){
+    // GRAPH_ADJ_MATRIX * graph_adj_matrix = init_adj_matrix_graph(4);
+    // insert_e_adj_matrix_graph(graph_adj_matrix, 0, 1, 4);
+    // insert_e_adj_matrix_graph(graph_adj_matrix, 0, 2, 7);
+    // insert_e_adj_matrix_graph(graph_adj_matrix, 3, 2, 2);
+    // printf_adj_matrix_graph(graph_adj_matrix);
+    // insert_v_adj_matrix_graph(graph_adj_matrix);
+    // printf_info_adj_matrix_graph("after insert a node in the graph!");
+    // printf_adj_matrix_graph(graph_adj_matrix);
+    // delete_v_adj_matrix_graph(graph_adj_matrix, 0);
+    // printf_info_adj_matrix_graph("after delete 0 node in the graph!");
+    // printf_adj_matrix_graph(graph_adj_matrix);
+    // destroy_adj_matrix_graph(graph_adj_matrix);
+    // GRAPH_ADJ_MATRIX * graph_adj_matrix = init_adj_matrix_graph(5);
+    // insert_e_adj_matrix_graph(graph_adj_matrix, 0, 3, 2);
+    // insert_e_adj_matrix_graph(graph_adj_matrix, 2, 1, 5);
+    // insert_e_adj_matrix_graph(graph_adj_matrix, 1, 4, 9);
+    // insert_e_adj_matrix_graph(graph_adj_matrix, 3, 4, 1);
+    // insert_e_adj_matrix_graph(graph_adj_matrix, 0, 2, 8);
+    // printf_info_adj_matrix_graph("the adj_matrix_graph info!");
+    // printf_adj_matrix_graph(graph_adj_matrix);
+    // printf_info_adj_matrix_graph("dfs the adj_matrix_graph!");
+    // dfs_traverse_adj_matrix_graph(graph_adj_matrix);
+    // printf_info_adj_matrix_graph("bfs the adj_matrix_graph!");
+    // bfs_traverse_adj_matrix_graph(graph_adj_matrix, 0);
     return 0;
 }

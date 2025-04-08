@@ -341,7 +341,7 @@ TreeNode **rightSideView(TreeNode *root, int *len) {
 //统计每行元素的平均值
 double *averageOfLevels(TreeNode *root, int *len) {
     if (root == NULL) {
-        return ;
+        return NULL;
     }
     //声明队列
     Queue *queue = initQueue();
