@@ -23,9 +23,28 @@ int uf_set_find(UF_SET *uf_set, int val) {
     return val;
 }
 
+//对find进行优化，若查找的x元素不在树的第二层，直接令其为第二层！
+int uf_set_find_better(UF_SET *uf_set, int x) {
+    int root = x;
+    //先找到root结点
+    while (root >= 0) {
+        root = uf_set->uf_set[root];
+    }
+    //找到root结点了，压缩路径
+    //如果是有父结点，则进行设置
+    while (root != x) {
+        int temp = uf_set->uf_set[x];
+        uf_set->uf_set[x] = root;
+        x = temp;
+    }
+    return root;
+}
+
 void uf_set_union(UF_SET *uf_set, int x, int y) {
-    int root_x = uf_set_find(uf_set, x);
-    int root_y = uf_set_find(uf_set, y);
+    // int root_x = uf_set_find(uf_set, x);
+    // int root_y = uf_set_find(uf_set, y);
+    int root_x = uf_set_find_better(uf_set, x);
+    int root_y = uf_set_find_better(uf_set, y);
     if (root_x == root_y)
         return;
     uf_set->uf_set[root_x] = uf_set->uf_set[root_x] + uf_set->uf_set[root_y];
