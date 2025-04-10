@@ -83,7 +83,6 @@ int index_main_string(String *main_string, String *sub_string) {
 void get_string_next(String *string, int *next) {
     int i = 1;
     int j = 0;
-    next[0] = -1;
     next[i] = 0;
     while (i < string->length) {
         if (j == 0 || string->string[i] == string->string[j]) {

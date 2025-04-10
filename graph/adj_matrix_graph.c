@@ -1,4 +1,5 @@
 #define DIF INT_MIN
+#define DMF INT_MAX
 #define EXPANSION_TIME 2
 #include "../ds/queue.c"
 #include <stdatomic.h>
@@ -88,6 +89,20 @@ void printf_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph);
  * @param graph 图
  */
 void destroy_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph);
+
+/**
+ * @description 图的Prim算法生成最小的生成树
+ * @param graph 图
+ * @param node_index 开始的结点
+ */
+void prim_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph, int node_index);
+
+/**
+ * @description 邻接矩阵的Dijkstra算法求MST
+ * @param graph 图
+ * @param node_index 开始的结点
+ */
+void dijkstra_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph, int node_index);
 
 /**
  * @description 获取v中val的索引值
@@ -293,6 +308,26 @@ void destroy_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph) {
     free(graph->E);
     free(graph->V);
     free(graph);
+}
+
+//TODO
+void prim_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph, int node_index) {
+
+}
+
+void dijkstra_adj_matrix_graph(GRAPH_ADJ_MATRIX *graph, int start_node) {
+    //声明三个辅助数组
+    int dist[graph->numsV];
+    bool final[graph->numsV];
+    int parent[graph->numsV];
+    //初始化三个数组
+    for (int i = 0; i < graph->numsV; i++) {
+        dist[i] = DMF;
+        final[i] = false;
+        parent[i] = -1;
+    }
+    //出发顶点到出发顶点的路径值为0
+    dist[start_node] = 0;
 }
 
 void printf_info_adj_matrix_graph(char *s) {
